@@ -12,22 +12,18 @@ public class EditorAutoSave : EditorWindow
     private int intervalScene;
     private DateTime lastSaveTimeScene = DateTime.Now;
 
-    private string projectPath = Application.dataPath;
     private string scenePath;
 
-    [MenuItem("Window/AutoSave")]
-    static void Init()
+    [MenuItem("Window/EditorAutoSave")]
+    public static void ShowWindow()
     {
-        EditorAutoSave saveWindow = (EditorAutoSave)EditorWindow.GetWindow(typeof(EditorAutoSave));
-        saveWindow.Show();
+        EditorWindow.GetWindow(typeof(EditorAutoSave));
     }
 
     void OnGUI()
     {
-        GUILayout.Label("Info:", EditorStyles.boldLabel);
-        EditorGUILayout.LabelField("Saving to:", "" + projectPath);
-        EditorGUILayout.LabelField("Saving scene:", "" + scenePath);
-        GUILayout.Label("Options:", EditorStyles.boldLabel);
+        GUILayout.Label("Info: AutoSave", EditorStyles.boldLabel);
+        GUILayout.Label("Options", EditorStyles.boldLabel);
         autoSaveScene = EditorGUILayout.BeginToggleGroup("Auto save", autoSaveScene);
         intervalScene = EditorGUILayout.IntSlider("Interval (minutes)", intervalScene, 1, 10);
         if (isStarted)
